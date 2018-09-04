@@ -24,7 +24,7 @@ import PlanosInfo from '../components/PlanosInfo';
 
 
 type Props = {};
-export default class PlanosCelular extends Component<Props> {
+export default class Favoritos extends Component<Props> {
 
     constructor() {
         super();
@@ -36,29 +36,25 @@ export default class PlanosCelular extends Component<Props> {
 
     componentDidMount() {
         this.props.navigator.setOnNavigatorEvent(event => {
-            if(event.id === 'willAppear') {
+            if(event.id === 'willAppear'){
                 AsyncStorage.getItem('usuario')
-                .then( usuario => {
-                    this.setState({user: usuario})
-                })
-                .then( () => {
-                    this.load();
-                })
+                .then( usuario => this.setState({user: usuario}))
+                .then( () => this.load())
             }
         });
     }
 
     load() {
-        let uri = '/celular';
+        let uri = '/celular/fav/' + this.state.user;
         this.fetch(uri);
     }
 
-    loadPlan(plan) {
-        if (plan === 'all') {
+    loadType(type) {
+        if (type === 'celular') {
             this.load();
         }
         else {
-            let uri = '/celular/plano/' + plan;
+            let uri = '/' + type + '/fav/' + this.state.user;
             this.fetch(uri);
         }
     }
@@ -85,17 +81,17 @@ export default class PlanosCelular extends Component<Props> {
                 </View>
 
                 <View style={styles.containerBar}>
-                    <TouchableOpacity style={styles.botao} onPress={() => this.loadPlan('all')} >
-                        <Image style={styles.img} source={require("../../resources/images/call.png")}/>
+                    <TouchableOpacity style={styles.botao} onPress={() => this.loadType('celular')} >
+                        <Image style={styles.img} source={require("../../resources/images/cell.png")}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.botao} onPress={() => this.loadPlan('Pos')} >
-                        <Image style={styles.img} source={require("../../resources/images/p.png")}/>
+                    <TouchableOpacity style={styles.botao} onPress={() => this.loadType('fixo')} >
+                        <Image style={styles.img} source={require("../../resources/images/fixo.png")}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.botao} onPress={() => this.loadPlan('Controle')} >
-                        <Image style={styles.img} source={require("../../resources/images/info.png")}/>
+                    <TouchableOpacity style={styles.botao} onPress={() => this.loadType('internet')} >
+                        <Image style={styles.img} source={require("../../resources/images/internet.png")}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.botao} onPress={() => this.loadPlan('Pre')} >
-                        <Image style={styles.img} source={require("../../resources/images/p.png")}/>
+                    <TouchableOpacity style={styles.botao} onPress={() => this.loadType('tv')} >
+                        <Image style={styles.img} source={require("../../resources/images/tv.png")}/>
                     </TouchableOpacity>
                 </View>
 

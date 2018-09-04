@@ -8,18 +8,16 @@ import Login from './src/screens/Login';
 import Cadastro from './src/screens/Cadastro';
 import User from './src/screens/User';
 import PlanosCelular from './src/screens/PlanosCelular';
-import PlanosFixo from './src/screens/PlanosFixo';
-import PlanosInternet from './src/screens/PlanosInternet';
-import PlanosTv from './src/screens/PlanosTv';
+import Planos from './src/screens/Planos';
+import Favoritos from './src/screens/Favoritos';
 
 Navigation.registerComponent('App', () => App);
 Navigation.registerComponent('Login', () => Login);
 Navigation.registerComponent('Cadastro', () => Cadastro);
 Navigation.registerComponent('User', () => User);
 Navigation.registerComponent('PlanosCelular', () => PlanosCelular);
-Navigation.registerComponent('PlanosFixo', () => PlanosFixo);
-Navigation.registerComponent('PlanosInternet', () => PlanosInternet);
-Navigation.registerComponent('PlanosTv', () => PlanosTv);
+Navigation.registerComponent('Planos', () => Planos);
+Navigation.registerComponent('Favoritos', () => Favoritos);
 
 AsyncStorage.getItem('token')
   .then(token => {
