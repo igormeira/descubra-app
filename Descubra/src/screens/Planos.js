@@ -7,11 +7,12 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, AsyncStorage, FlatList} from 'react-native';
+import {StyleSheet, ScrollView, AsyncStorage, FlatList, NetInfo, RefreshControl} from 'react-native';
 
 import DescubraFetchService from '../services/DescubraFetchService';
 import PlanosInfo from '../components/PlanosInfo';
-
+import Loader from '../components/Loader';
+import Notificacao from '../api/Notificacao';
 
 type Props = {};
 export default class Planos extends Component<Props> {
@@ -21,6 +22,7 @@ export default class Planos extends Component<Props> {
         this.state = {
             data: [],
             user: '',
+            loading: true,
         }
     }
 
@@ -39,6 +41,11 @@ export default class Planos extends Component<Props> {
     }
 
     load() {
+        this.setState({loading: true});
+        this.fetch();
+    }
+
+    fetch() {
         AsyncStorage.getItem('table')
         .then( table => {
             console.log(table);
@@ -47,14 +54,22 @@ export default class Planos extends Component<Props> {
         })
         .then( uri => {
             DescubraFetchService.get(uri)
-            .then(json => this.setState({data: json}))
-            .catch(e => this.setState({status: 'FALHA_CARREGAMENTO'}));
+            .then(json => 
+                this.setState({data: json})
+            )
+            .then( () => {
+                this.setState({loading: false})
+            })
+            .catch(e => this.setState({status: 'FALHA_CARREGAMENTO'}))
         })
     }
 
     render() {
         return (
             <ScrollView style={styles.container}>
+                <Loader
+                    loading={this.state.loading} />
+
                 <FlatList
                     data={this.state.data}
                     renderItem={({item}) =>

@@ -21,6 +21,7 @@ import
 
 import DescubraFetchService from '../services/DescubraFetchService';
 import PlanosInfo from '../components/PlanosInfo';
+import Loader from '../components/Loader';
 
 
 type Props = {};
@@ -31,6 +32,7 @@ export default class PlanosCelular extends Component<Props> {
         this.state = {
             data: [],
             user: '',
+            loading: true,
         }
     }
 
@@ -50,6 +52,7 @@ export default class PlanosCelular extends Component<Props> {
 
     load() {
         let uri = '/celular';
+        this.setState({loading: true});
         this.fetch(uri);
     }
 
@@ -59,19 +62,29 @@ export default class PlanosCelular extends Component<Props> {
         }
         else {
             let uri = '/celular/plano/' + plan;
+            this.setState({loading: true});
             this.fetch(uri);
         }
     }
 
     fetch(uri) {
         DescubraFetchService.get(uri)
-            .then(json => this.setState({data: json}))
+            .then(json => 
+                this.setState({data: json})
+            )
+            .then( () => {
+                this.setState({loading: false})
+            })
             .catch(e => this.setState({status: 'FALHA_CARREGAMENTO'}));
     }
 
     render() {
         return (
             <View style={styles.containerAll}>
+
+                <Loader
+                    loading={this.state.loading} />
+
                 <View style={styles.container}>
                     <ScrollView style={styles.containerScroll}>
                         <FlatList
