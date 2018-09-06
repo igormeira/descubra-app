@@ -17,8 +17,8 @@ import {
 } from 'react-native';
 import { Picker } from 'react-native-picker-dropdown'
 
-import DescubraFetchService from '../services/DescubraFetchService';
-import Notificacao from '../api/Notificacao'
+import DescubraFetchService from '../../services/DescubraFetchService';
+import Notificacao from '../../api/Notificacao'
 
 const width = Dimensions.get('screen').width;
 

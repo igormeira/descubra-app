@@ -16,7 +16,7 @@ import {
     AsyncStorage,
 } from 'react-native';
 
-import DescubraFetchService from './src/services/DescubraFetchService';
+import DescubraFetchService from '../services/DescubraFetchService';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -26,7 +26,6 @@ export default class App extends Component<Props> {
             .then( token => {
                 DescubraFetchService.postLogout(token)
                 .then( () => {
-                    //Notificacao.exibe(json[0].msg, 'Até mais!');
                     AsyncStorage.removeItem('token'),
                     AsyncStorage.removeItem('refresh_token'),
                     AsyncStorage.removeItem('usuario')
@@ -83,14 +82,14 @@ export default class App extends Component<Props> {
                             style={styles.buttonLeft}>
                             <Image
                                 style={styles.buttonImg}
-                                source={require('./resources/images/cell.png')} />
+                                source={require('../../resources/images/cell.png')} />
                             <Text>Planos para Celular</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.planos("fixo")}
                             style={styles.buttonRight}>
                             <Image
                                 style={styles.buttonImg}
-                                source={require('./resources/images/fixo.png')} />
+                                source={require('../../resources/images/fixo.png')} />
                             <Text>Planos para Fixo</Text>
                         </TouchableOpacity>
                     </View>
@@ -99,14 +98,14 @@ export default class App extends Component<Props> {
                             style={styles.buttonLeft}>
                             <Image
                                 style={styles.buttonImg}
-                                source={require('./resources/images/internet.png')} />
+                                source={require('../../resources/images/internet.png')} />
                             <Text>Planos para Internet</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.planos("tv")}
                             style={styles.buttonRight}>
                             <Image
                                 style={styles.buttonImg}
-                                source={require('./resources/images/tv.png')} />
+                                source={require('../../resources/images/tv.png')} />
                             <Text>Planos para TV</Text>
                         </TouchableOpacity>
                     </View>
@@ -114,13 +113,13 @@ export default class App extends Component<Props> {
 
                 <View style={styles.containerBar}>
                     <TouchableOpacity style={styles.botao} onPress={() => this.userInfo()} >
-                        <Image style={styles.img} source={require("./resources/images/user_bt.png")}/>
+                        <Image style={styles.img} source={require("../../resources/images/user_bt.png")}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.botao} onPress={() => this.favs()} >
-                        <Image style={styles.img} source={require("./resources/images/like.png")}/>
+                        <Image style={styles.img} source={require("../../resources/images/like.png")}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.botao} onPress={() => this.exit()} >
-                        <Image style={styles.img} source={require("./resources/images/exit.png")}/>
+                        <Image style={styles.img} source={require("../../resources/images/exit.png")}/>
                     </TouchableOpacity>
                 </View>
 

@@ -91,4 +91,29 @@ export default class DescubraFetchService {
         });
     }
 
+    static postUpdate(email, nome, ddd, sexo) {
+        const uri = 'https://descubra-api.herokuapp.com/usuario/update';
+        const requestInfo = {
+        method: 'POST',
+        body: JSON.stringify({
+            email: email,
+            nome: nome,
+            ddd: ddd,
+            sexo: sexo
+        }),
+        headers: new Headers({
+            'Content-type': 'application/json'
+        })
+        }
+
+        return fetch(uri, requestInfo)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
 }

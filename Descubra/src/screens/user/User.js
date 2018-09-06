@@ -16,7 +16,7 @@ import {
     AsyncStorage,
 } from 'react-native';
 
-import DescubraFetchService from '../services/DescubraFetchService';
+import DescubraFetchService from '../../services/DescubraFetchService';
 
 const width = Dimensions.get('screen').width;
 
@@ -47,22 +47,21 @@ export default class User extends Component<Props> {
             ddd: '',
             sexo: '',
         }
-        // if you want to listen on navigator events, set this up
-        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-    }
-
-    onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
-        if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
-            if (event.id == 'edit') { // this is the same id field from the static navigatorButtons definition
-                
-            }
-        }
     }
 
     componentDidMount() {
         this.props.navigator.setOnNavigatorEvent(event => {
             if(event.id === 'willAppear')
                 this.load();
+            else if (event.type === 'NavBarButtonPress') { // this is the event type for button presses
+                if (event.id === 'edit') { // this is the same id field from the static navigatorButtons definition
+                    this.props.navigator.push({
+                        screen: 'EditUser',
+                        title: 'Editar Dados',
+                        backButtonTitle: ''
+                      })
+                }
+            }
         });
     }
 
@@ -76,9 +75,13 @@ export default class User extends Component<Props> {
         .then( uri => {
             DescubraFetchService.get(uri)
             .then(json => {
+                AsyncStorage.setItem('nome', json[0].nome),
+                AsyncStorage.setItem('ddd', json[0].ddd.toString()),
+                AsyncStorage.setItem('sexo', json[0].sexo),
+
                 this.setState({nome: json[0].nome}),
                 this.setState({email: json[0].email}),
-                this.setState({ddd: json[0].ddd}),
+                this.setState({ddd: json[0].ddd}),                
                 this.setState({sexo: json[0].sexo})
             })
             .catch(e => this.setState({status: 'FALHA_CARREGAMENTO'}));
@@ -88,7 +91,7 @@ export default class User extends Component<Props> {
     render() {
         return (
         <View style={styles.container}>
-            <Image style={styles.img} source={require("../../resources/images/default_user.png")}/>
+            <Image style={styles.img} source={require("../../../resources/images/default_user.png")}/>
 
             <Text style={styles.info} >
                 Nome: {this.state.nome}
