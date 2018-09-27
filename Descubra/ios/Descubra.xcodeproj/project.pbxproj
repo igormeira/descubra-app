@@ -38,6 +38,8 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* DescubraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DescubraTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		3A3C077B215AC6E200D415A9 /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3C077A215AC4D100D415A9 /* libSQLite.a */; };
+		3A3C077D215AC6F700D415A9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3C077C215AC6F700D415A9 /* libsqlite3.0.tbd */; };
 		3A86AAEA211DEE960081E0D0 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A86AAE9211DEE5C0081E0D0 /* libReactNativeNavigation.a */; };
 		53685B12516C4419A2D60C70 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA8CBB39D6C244B38FEE6498 /* Octicons.ttf */; };
 		55454907FA4A4D1B95206608 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90AE5706B34B490688AE5ACC /* FontAwesome5_Solid.ttf */; };
@@ -203,6 +205,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
 			remoteInfo = "privatedata-tvOS";
+		};
+		3A3C0779215AC4D100D415A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A3C074E215AC4D100D415A9 /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E23D7B471ACEFE2A00C59171;
+			remoteInfo = SQLite;
 		};
 		3A7551102128716600AABBD9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -373,6 +382,8 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		372FFAA188DF4F8E8A4AD6BB /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		39BE38CFAA414AC0AF81DDA2 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		3A3C074E215AC4D100D415A9 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		3A3C077C215AC6F700D415A9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3A86AABF211DEE5C0081E0D0 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		60E47767186B4C8F92844F42 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -405,6 +416,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3C077D215AC6F700D415A9 /* libsqlite3.0.tbd in Frameworks */,
+				3A3C077B215AC6E200D415A9 /* libSQLite.a in Frameworks */,
 				3A86AAEA211DEE960081E0D0 /* libReactNativeNavigation.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -568,6 +581,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A3C077C215AC6F700D415A9 /* libsqlite3.0.tbd */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 			);
 			name = Frameworks;
@@ -592,6 +606,14 @@
 				DC0F50B6D6F2481BB2413A35 /* Zocial.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		3A3C074F215AC4D100D415A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A3C077A215AC4D100D415A9 /* libSQLite.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3A7550E62128716300AABBD9 /* Recovered References */ = {
@@ -639,6 +661,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3A3C074E215AC4D100D415A9 /* SQLite.xcodeproj */,
 				3A86AABF211DEE5C0081E0D0 /* ReactNativeNavigation.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -873,6 +896,10 @@
 					ProductGroup = 3A75510D2128716600AABBD9 /* Products */;
 					ProjectRef = 2CBFB3EC6A9E4FD2B80BB0E6 /* RNVectorIcons.xcodeproj */;
 				},
+				{
+					ProductGroup = 3A3C074F215AC4D100D415A9 /* Products */;
+					ProjectRef = 3A3C074E215AC4D100D415A9 /* SQLite.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1016,6 +1043,13 @@
 			fileType = archive.ar;
 			path = "libprivatedata-tvOS.a";
 			remoteRef = 2DF0FFEC2056DD460020B375 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A3C077A215AC4D100D415A9 /* libSQLite.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSQLite.a;
+			remoteRef = 3A3C0779215AC4D100D415A9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3A7551112128716600AABBD9 /* libRNVectorIcons.a */ = {
@@ -1369,6 +1403,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 				);
 				INFOPLIST_FILE = Descubra/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1392,6 +1427,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 				);
 				INFOPLIST_FILE = Descubra/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

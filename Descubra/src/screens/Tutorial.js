@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import FirstTime from '../components/FirstTime';
 
 type Props = {};
@@ -14,10 +14,12 @@ export default class Tutorial extends Component<Props> {
     }
 
     ready() {
-        this.props.navigator.resetTo({
-          screen: 'Login',
-          title: 'Login'
-        })
+        AsyncStorage.setItem('first_time', 'NO'),
+            AsyncStorage.setItem('favs', JSON.stringify({ celular: [], fixo: [], net: [], tv: [] })),
+            this.props.navigator.resetTo({
+                screen: 'Login',
+                title: 'Login'
+            })
       }
 
     render() {

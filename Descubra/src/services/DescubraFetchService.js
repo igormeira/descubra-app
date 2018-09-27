@@ -42,65 +42,10 @@ export default class DescubraFetchService {
         });
     }
 
-    static postLogin(usuario, senha) {
-        const uri = 'https://descubra-api.herokuapp.com/login';
+    static post(uri, body) {
         const requestInfo = {
         method: 'POST',
-        body: JSON.stringify({
-            email: usuario,
-            senha: senha
-        }),
-        headers: new Headers({
-            'Content-type': 'application/json'
-        })
-        }
-
-        return fetch(uri, requestInfo)
-        .then((response) => response.json())
-        .then((responseJson) => {
-            return responseJson;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
-
-    static postCadastro(nome, email, senha, ddd, sexo) {
-        const uri = 'https://descubra-api.herokuapp.com/cadastro';
-        const requestInfo = {
-        method: 'POST',
-        body: JSON.stringify({
-            nome: nome,
-            email: email,
-            senha: senha,
-            ddd: ddd,
-            sexo: sexo
-        }),
-        headers: new Headers({
-            'Content-type': 'application/json'
-        })
-        }
-
-        return fetch(uri, requestInfo)
-        .then((response) => response.json())
-        .then((responseJson) => {
-            return responseJson;
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
-
-    static postUpdate(email, nome, ddd, sexo) {
-        const uri = 'https://descubra-api.herokuapp.com/usuario/update';
-        const requestInfo = {
-        method: 'POST',
-        body: JSON.stringify({
-            email: email,
-            nome: nome,
-            ddd: ddd,
-            sexo: sexo
-        }),
+        body: JSON.stringify(body),
         headers: new Headers({
             'Content-type': 'application/json'
         })

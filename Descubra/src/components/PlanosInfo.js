@@ -9,7 +9,10 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image, Linking, AsyncStorage} from 'react-native';
 
+import call from 'react-native-phone-call';
+
 import DescubraFetchService from '../services/DescubraFetchService';
+import DescubraSQLiteService from '../services/DescubraSQLiteService';
 import Notificacao from '../api/Notificacao';
 
 type Props = {};
@@ -29,18 +32,22 @@ export default class PlanosInfo extends Component<Props> {
             case 'Oi':
                 return Linking.openURL('https://www.oi.com.br');
             default:
-                return NONE;
+                return;
         }
     }
 
     callTo(op) {
         switch(op) {
             case 'TIM':
-                return Linking.openURL('http://www.tim.com.br');
+                return;
             case 'Oi':
-                return Linking.openURL('https://www.oi.com.br');
+                const args = {
+                    number: '987272773', // String value with the number to call
+                    prompt: true // Optional boolean property. Determines if the user should be prompt prior to the call 
+                };
+                call(args).catch(console.error);
             default:
-                return NONE;
+                return;
         }
     }
 

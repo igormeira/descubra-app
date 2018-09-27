@@ -8,21 +8,13 @@
 
 import React, {Component} from 'react';
 
-import
-{
-    StyleSheet,
-    View,
-    ScrollView,
-    FlatList,
-    TouchableOpacity,
-    Image,
-    AsyncStorage,
-} from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList, TouchableOpacity, Image, AsyncStorage, Dimensions, Text} from 'react-native';
 
 import DescubraFetchService from '../services/DescubraFetchService';
 import PlanosInfo from '../components/PlanosInfo';
 import Loader from '../components/Loader';
 
+const height = Dimensions.get('screen').height;
 
 type Props = {};
 export default class PlanosCelular extends Component<Props> {
@@ -31,6 +23,8 @@ export default class PlanosCelular extends Component<Props> {
         super();
         this.state = {
             data: [],
+            no_data: 'NÃO EXISTEM PLANOS!',
+            showText: false,
             user: '',
             loading: true,
         }
@@ -53,30 +47,41 @@ export default class PlanosCelular extends Component<Props> {
     load() {
         let uri = '/celular';
         this.setState({loading: true});
+        this.setState({ data: [] });
         this.fetch(uri);
     }
 
     loadPlan(plan) {
         if (plan === 'all') {
+            this.setState({ showText: false });
             this.load();
         }
         else {
             let uri = '/celular/plano/' + plan;
+            this.setState({ showText: false });
             this.setState({loading: true});
+            this.setState({ data: [] });
             this.fetch(uri);
         }
     }
 
     fetch(uri) {
         DescubraFetchService.get(uri)
-            .then(json => 
-                this.setState({data: json})
-            )
+            .then(json => {
+                if (json.length === 0) {
+                    this.setState({ showText: true })
+                }
+                else {
+                    this.setState({ data: json })
+                }
+            })
             .then( () => {
                 this.setState({loading: false})
             })
             .catch(e => this.setState({status: 'FALHA_CARREGAMENTO'}));
     }
+
+    _keyExtractor = item => item.id;
 
     render() {
         return (
@@ -89,12 +94,19 @@ export default class PlanosCelular extends Component<Props> {
                     <ScrollView style={styles.containerScroll}>
                         <FlatList
                             data={this.state.data}
+                            keyExtractor={this._keyExtractor}
                             renderItem={({item}) =>
                             <PlanosInfo data={item}
                             user={this.state.user}/>
                             }
                         />
+
+                        { this.state.showText ? <Text style={styles.semPlanos}>
+                            {this.state.no_data}
+                        </Text> : null } 
+
                     </ScrollView>
+
                 </View>
 
                 <View style={styles.containerBar}>
@@ -148,5 +160,11 @@ const styles = StyleSheet.create({
     img: {
         height: 30,
         width: 30,
+    },
+    semPlanos: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: height / 2.5
     },
 });

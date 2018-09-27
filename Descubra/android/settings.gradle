@@ -1,5 +1,17 @@
 rootProject.name = 'Descubra'
 
+include ':react-native-sqlite-storage'
+project(':react-native-sqlite-storage').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sqlite-storage/src/android')
+
+include ':react-native-dialog'
+project(':react-native-dialog').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-dialog/android')
+
+include ':react-native-phone-call'
+project(':react-native-phone-call').projectDir = new File(rootProject.projectDir, '../node_modules/rreact-native-phone-call/android')
+
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+
 include ':app'
 include ':react-native-navigation'
 project(':react-native-navigation').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-navigation/android/app/')

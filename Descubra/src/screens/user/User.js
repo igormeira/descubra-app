@@ -67,25 +67,25 @@ export default class User extends Component<Props> {
 
     load() {
         //AsyncStorage returns a promise
+        AsyncStorage.getItem('nome')
+            .then(nome => {
+                this.setState({ nome: nome })
+            });
+
+        AsyncStorage.getItem('sexo')
+            .then(sexo => {
+                this.setState({ sexo: sexo })
+            });
+
+        AsyncStorage.getItem('ddd')
+            .then(ddd => {
+                this.setState({ ddd: ddd })
+            });
+
         AsyncStorage.getItem('usuario')
         .then( usuario => {
-            const uri = '/usuario/' + usuario
-            return uri
-        })
-        .then( uri => {
-            DescubraFetchService.get(uri)
-            .then(json => {
-                AsyncStorage.setItem('nome', json[0].nome),
-                AsyncStorage.setItem('ddd', json[0].ddd.toString()),
-                AsyncStorage.setItem('sexo', json[0].sexo),
-
-                this.setState({nome: json[0].nome}),
-                this.setState({email: json[0].email}),
-                this.setState({ddd: json[0].ddd}),                
-                this.setState({sexo: json[0].sexo})
-            })
-            .catch(e => this.setState({status: 'FALHA_CARREGAMENTO'}));
-        })
+            this.setState({ email: usuario })
+        });
     }
 
     render() {

@@ -14,14 +14,28 @@ import {
     TouchableOpacity, 
     Image, 
     AsyncStorage,
+    Dimensions,
 } from 'react-native';
 
 import DescubraFetchService from '../services/DescubraFetchService';
+import Dialog from "react-native-dialog";
+import Loader from '../components/Loader';
+
+const width = Dimensions.get('screen').width;
 
 type Props = {};
 export default class App extends Component<Props> {
 
+    constructor() {
+        super();
+        this.state = {
+            quit: false,
+            loading: false,
+        }
+    }
+
     exit() {
+        this.setState({ loading: true });
         AsyncStorage.getItem('token')
             .then( token => {
                 DescubraFetchService.postLogout(token)
@@ -31,6 +45,7 @@ export default class App extends Component<Props> {
                     AsyncStorage.removeItem('usuario')
                 })
                 .then( () => {
+                    this.dismissDialog(),
                     this.props.navigator.resetTo({
                         screen: 'Login',
                         title: 'Login'
@@ -73,9 +88,29 @@ export default class App extends Component<Props> {
         })
     }
 
+    showDialog() {
+        this.setState({ quit : true });
+    }
+
+    dismissDialog() {
+        this.setState({ quit : false });
+    }
+
     render() {
         return (
             <View style={styles.containerAll}>
+
+                <Loader
+                    loading={this.state.loading} />
+
+                <View style={styles.dialog}>
+                    <Dialog.Container visible={this.state.quit}>
+                        <Dialog.Title>Deseja sair?</Dialog.Title>
+                        <Dialog.Button label="Cancelar" onPress={this.dismissDialog.bind(this)} />
+                        <Dialog.Button label="Sair" onPress={this.exit.bind(this)} />
+                    </Dialog.Container>
+                </View>
+
                 <View style={styles.container}>
                     <View style={styles.containerHalf}>
                         <TouchableOpacity onPress={() => this.planos("celular")}
@@ -118,7 +153,7 @@ export default class App extends Component<Props> {
                     <TouchableOpacity style={styles.botao} onPress={() => this.favs()} >
                         <Image style={styles.img} source={require("../../resources/images/like.png")}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.botao} onPress={() => this.exit()} >
+                    <TouchableOpacity style={styles.botao} onPress={() => this.showDialog()} >
                         <Image style={styles.img} source={require("../../resources/images/exit.png")}/>
                     </TouchableOpacity>
                 </View>
@@ -184,5 +219,8 @@ const styles = StyleSheet.create({
     img: {
         height: 30,
         width: 30,
+    },
+    dialog: {
+        width: width * 0.8,
     },
 });

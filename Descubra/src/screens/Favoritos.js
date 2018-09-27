@@ -17,11 +17,15 @@ import
     TouchableOpacity,
     Image,
     AsyncStorage,
+    Text,
+    Dimensions
 } from 'react-native';
 
 import DescubraFetchService from '../services/DescubraFetchService';
 import PlanosInfo from '../components/PlanosInfo';
+import Loader from '../components/Loader';
 
+const height = Dimensions.get('screen').height;
 
 type Props = {};
 export default class Favoritos extends Component<Props> {
@@ -30,7 +34,10 @@ export default class Favoritos extends Component<Props> {
         super();
         this.state = {
             data: [],
+            no_data: 'NÃO EXISTEM PLANOS!',
+            showText: false,
             user: '',
+            loading: true,
         }
     }
 
@@ -46,22 +53,38 @@ export default class Favoritos extends Component<Props> {
 
     load() {
         let uri = '/celular/fav/' + this.state.user;
+        this.setState({ loading: true });
+        this.setState({ data: [] });
         this.fetch(uri);
     }
 
     loadType(type) {
         if (type === 'celular') {
+            this.setState({ showText: false });
             this.load();
         }
         else {
             let uri = '/' + type + '/fav/' + this.state.user;
+            this.setState({ showText: false });
+            this.setState({ loading: true });
+            this.setState({ data: [] });
             this.fetch(uri);
         }
     }
 
     fetch(uri) {
         DescubraFetchService.get(uri)
-            .then(json => this.setState({data: json}))
+            .then(json => {
+                if (json.length === 0) {
+                    this.setState({ showText: true })
+                }
+                else {
+                    this.setState({ data: json })
+                }
+            })
+            .then(() => {
+                this.setState({ loading: false })
+            })
             .catch(e => this.setState({status: 'FALHA_CARREGAMENTO'}));
     }
 
@@ -70,6 +93,10 @@ export default class Favoritos extends Component<Props> {
             <View style={styles.containerAll}>
                 <View style={styles.container}>
                     <ScrollView style={styles.containerScroll}>
+
+                        <Loader
+                            loading={this.state.loading} />
+
                         <FlatList
                             data={this.state.data}
                             renderItem={({item}) =>
@@ -77,6 +104,11 @@ export default class Favoritos extends Component<Props> {
                             user={this.state.user}/>
                             }
                         />
+                        
+                        {this.state.showText ? <Text style={styles.semPlanos}>
+                            {this.state.no_data}
+                        </Text> : null} 
+
                     </ScrollView>
                 </View>
 
@@ -131,5 +163,11 @@ const styles = StyleSheet.create({
     img: {
         height: 30,
         width: 30,
+    },
+    semPlanos: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: height / 2.5
     },
 });

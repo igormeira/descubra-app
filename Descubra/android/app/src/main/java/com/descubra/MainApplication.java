@@ -7,11 +7,13 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.Arrays;
 import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
+import org.pgsqlite.SQLitePluginPackage;
 
 
 public class MainApplication extends NavigationApplication implements ReactApplication {
@@ -25,7 +27,9 @@ public class MainApplication extends NavigationApplication implements ReactAppli
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+              new SQLitePluginPackage(),   // register SQLite Plugin here
+              new MainReactPackage(),
+              new VectorIconsPackage()
       );
     }
 

@@ -29,28 +29,28 @@ Navigation.registerComponent('Favoritos', () => Favoritos);
 
 
 AsyncStorage.getItem('token')
-  .then(token => {
-    if(token) {
-      return {
-        screen: 'App',
-        title: 'Descubra'
-      };
-    }
-    return AsyncStorage.getItem('first-time')
-    .then(ft => {
-      if(ft) {
-        return {
-          screen: 'Login',
-          title: 'Login'
+    .then(token => {
+        if (token) {
+            return {
+                screen: 'App',
+                title: 'Descubra'
+            };
         }
-      }
-      return {
-        screen: 'Tutorial',
-        title: 'Bem Vind@ ao Descubra'
-      }
-      
+        return AsyncStorage.getItem('first_time')
+            .then(ft => {
+                if (ft === 'NO') {
+                    return {
+                        screen: 'Login',
+                        title: 'Login'
+                    }
+                }
+                return {
+                    screen: 'Tutorial',
+                    title: 'Bem Vind@ ao Descubra'
+                }
+
+            })
     })
-  })
-  .then(screen => {
-    Navigation.startSingleScreenApp({screen : screen});
-  });
+    .then(screen => {
+        Navigation.startSingleScreenApp({ screen: screen });
+    });
