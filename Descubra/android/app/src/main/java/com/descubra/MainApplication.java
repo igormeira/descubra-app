@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
-import org.pgsqlite.SQLitePluginPackage;
 
 
 public class MainApplication extends NavigationApplication implements ReactApplication {
@@ -27,7 +26,6 @@ public class MainApplication extends NavigationApplication implements ReactAppli
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-              new SQLitePluginPackage(),   // register SQLite Plugin here
               new MainReactPackage(),
               new VectorIconsPackage()
       );

@@ -12,7 +12,6 @@ import {StyleSheet, Text, View, TouchableOpacity, Image, Linking, AsyncStorage} 
 import call from 'react-native-phone-call';
 
 import DescubraFetchService from '../services/DescubraFetchService';
-import DescubraSQLiteService from '../services/DescubraSQLiteService';
 import Notificacao from '../api/Notificacao';
 
 type Props = {};
